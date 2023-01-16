@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="Timber!" default="main" basedir=".">
+    <property name="src.dir" location="src" />
+    <property name="build.dir" location="target" />
+    <property name="lib.dir" location="lib" />
+    <property name="config.dir" location="config" />
+
+    <path id="compile.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar" />
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+
+    <target name="makedir">
+        <mkdir dir="${build.dir}" />
+    </target>
+
+    <target name="compile" depends="clean, makedir">
+        <copy todir="${build.dir}/">
+            <fileset dir="${config.dir}" />
+        </copy>
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath refid="compile.classpath" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${build.dir}\Timber.jar" basedir="${build.dir}">
+        </jar>
+    </target>
+
+    <target name="main" depends="compile, jar">
+        <description>Main target</description>
+    </target>
+</project>
