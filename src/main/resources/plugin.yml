@@ -1,0 +1,6 @@
+name: ${project.name}
+main: ${project.main.class}
+
+version: ${project.version}
+description: ${project.description}
+authors: [${project.author}]
